@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="content-section">
+        <form method="post" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend>Type proteins here</legend>
+                <div class="mb-3">
+                    {{ form.proteins.label(class='form-control-label') }}
+
+                    {% if form.proteins.errors %}
+                        {{ form.proteins(class='form-control form-control-lg is-invalid') }}
+                            <div class="invalid-feedback">
+                                {% for error in form.proteins.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                    {% else %}
+                        {{ form.proteins(class='form-control form-control-lg') }}
+                    {% endif %}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}

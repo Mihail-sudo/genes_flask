@@ -1,0 +1,6 @@
+__pycache__
+env
+site.db
+.DS_Store
+algo.py
+genes.json

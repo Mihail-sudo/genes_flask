@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="content-section">
+        {% for gene_name, gene_option in genes.items() %}
+            <div class="gen-info">
+                <div class="content-block">
+                    {% if gene_option %}
+                        <h4>{{ gene_name}}</h4>
+                        <p>{{ gene_option }}</p>
+                    {% else %}
+                        <h4>Sorry we didn't found {{ gene_name }}</h4>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
