@@ -1,3 +1,5 @@
+'''Module for main function'''
+
 import csv
 
 GENES_FILE = 'genes.csv'

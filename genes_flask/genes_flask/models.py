@@ -2,7 +2,6 @@ from itsdangerous import URLSafeTimedSerializer as Serializer
 from datetime import datetime
 from random import randint
 
-from sqlalchemy import null
 from genes_flask import db, login_manager
 from flask import current_app
 from flask_login import UserMixin
@@ -58,19 +57,3 @@ class Post(db.Model):
     def __repr__(self) -> str:
         return f'Post {self.title}, {self.date_posted}'
     
-    
-class Gene(db.Model):
-    Field1 = db.Column(db.Integer)
-    X = db.Column(db.Integer)
-    Unnamed = db.Column(db.Integer)
-    Original_request = db.Column(db.String(20), nullable=False, primary_key=True)
-    Functoin = db.Column(db.Text, nullable=False)
-    Entry = db.Column(db.String(20))
-    Entry_name = db.Column(db.String(40))
-    Protein_names = db.Column(db.Text)
-    Gene_names = db.Column(db.Text)
-    Organism = db.Column(db.Text)
-    Length = db.Column(db.Integer)
-    Go = db.Column(db.Text)
-    Disease = db.Column(db.String(40))
-    Expr = db.Column(db.String(40))
