@@ -1,0 +1,181 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  --primary: #003f5c;
+  --secondary: #a5ecda;
+  --myPurple: #bc5090;
+  --myRed: #ff6361;
+  --myYellow: #ffa600;
+  --dark: #333333;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.navbar {
+  background-color: var(--secondary);
+  color: #fff;
+  height: 60px;
+}
+
+.logo {
+  font-size: x-large;
+  font-weight: bold;
+  color: var(--dark)
+}
+
+.search {
+  font-size: large;
+  background-color: var(--dark);
+  padding: 3px 5px;
+  margin-left: 5px;
+  border-radius: 0 20px 20px 0;
+}
+
+.navbar .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  cursor: pointer;
+}
+
+.menu-trigger {
+  margin-left: auto;
+  font-size: large;
+  background: var(--dark);
+  padding: 3px 9px;
+  border-radius: 10px;
+}
+
+.navbar .container .menu {
+  margin-left: auto;
+  display: none;
+  justify-content: space-around;
+}
+
+.navbar .container .dropped-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  border: 2px solid #fff;
+  top: 60px;
+  right: 20px;
+}
+
+.navbar .container .dropped-menu a{
+  font-size: 30px;
+  padding: 3px 5px;
+  background: var(--dark)
+}
+
+.navbar .container .menu a {
+  font-size: large;
+  padding: 3px 5px;
+  background: var(--dark)
+}
+
+.navbar .container .menu :first-child {
+  padding-left: 10px;
+  border-radius: 20px 0 0 20px;
+}
+
+.navbar .container .menu :last-child {
+  padding-right: 10px;
+  border-radius: 0 20px 20px 0;
+}
+
+.tooltip{
+  display: none;
+}
+
+h1 {
+  width: 100%;
+  margin: 50px 0 10px;
+  text-align: center;
+  color: #333333;
+}
+
+.info {
+  margin: 50px 0 10px;
+  min-height: 150px;
+  width: 100%;
+  border: 2px solid var(--dark);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.info .h2 {
+  margin-bottom: 10px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.info td {
+  padding: 5px;
+  vertical-align: top;
+  border-bottom: 1px solid #333;
+}
+
+.info tbody :last-child td{
+  border: none;
+}
+
+.recharts-legend-item {
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+  .tooltip {
+    display: block;
+    background-color: var(--secondary);
+    color: #fff;
+    border-radius: 5px;
+    border: 2px solid #333333;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .menu-trigger {
+    display: none;
+  }
+
+  .navbar .container .menu {
+    margin-left: auto;
+    display: flex;
+  }
+  
+  .navbar .container .menu a {
+    font-size: large;
+    padding: 3px 5px;
+    background: var(--dark);
+  }
+  
+  .navbar .container .menu :first-child {
+    padding-left: 10px;
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .navbar .container .menu :last-child {
+    padding-right: 10px;
+    border-radius: 0 20px 20px 0;
+  }
+}
