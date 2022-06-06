@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
-import Chart from './components/Chart';
+import { Routes, Route, Link } from "react-router-dom"
 import ScatterChart from './components/ScatterChart';
 import Info from './components/Info';
-import './index.css';
+import Test from './components/Test';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Search from './components/Search';
+import Answer from './components/Answer';
+import Home from './components/Home';
 
 function App() {
   
@@ -10,14 +15,8 @@ function App() {
 const [nodes, setNodes] = useState([])
 
   const getData = () => {
-    fetch('nodes.json').then(response => response.json()).then(data => setNodes(data))
+    fetch('nodes.json').then(response => response.json()).then(data => setNodes(data.data.map((node, index) => ({posX: node[1], posY: node[0], group: node[2], id: index}))))
   }
-
-  const isMobile = ('ontouchstart' in window ) ||
-  ( navigator.maxTouchPoints > 0 ) ||
-  ( navigator.msMaxTouchPoints > 0 );
-
-  const [dropdown, setDropdown] = useState(false)
 
   useEffect(()=>{
     getData()
@@ -30,32 +29,55 @@ const [nodes, setNodes] = useState([])
     ))
   }
 
+  const current_user = {
+    is_authenticated: true
+  }
+
   const selectedNode = nodes.find(node => node.selected)
 
     return (
-      <div>
-        <nav className="navbar">
-          <div className="container">
-            <a className="logo">Genes</a>
-            <a className="search">Search</a>
-            <a className="menu-trigger" onClick={() => setDropdown(!dropdown)}>#</a>
-            <div className={!isMobile ? "menu" : (dropdown ? "dropped-menu" : "menu")}>
-              <a>New post</a>
-              <a>My profile</a>
-              <a>Logout</a>
+      <>
+      <Header current_user={current_user}/>
+        <main role="main" className="container">
+            <div className="row">
+                {/* <div className="col-md-8"> */}
+                    {/* {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %} 
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %} */}
+                    <div className="content-section">
+                      <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/search" element={<Search/>}/>
+                        <Route path="/search/answer" element={<Answer nodes={nodes} selectNode={selectNode} selectedNode={selectedNode}  />}/>
+                      </Routes>
+                    </div>
+                {/* </div> */}
+                {/* <div className="col-md-4">
+                    <div className="content-section">
+                        <h3>Our Sidebar</h3>
+                        <p className="text-muted">You can put any info here</p>
+                        <ul>
+                            <li>Latest posts</li>
+                            <li>Announcements</li>
+                            <li>Calendars</li>
+                            <li>etc</li>
+                        </ul>
+                    </div>
+                </div> */}
             </div>
-          </div>
-        </nav>
-        <div className="container">
-          <h1>The Graph</h1>
-          {/* <Chart onSelect={selectNode} data={nodes}/> */}
-          <ScatterChart nodes={nodes} onSelect={selectNode}/>
-          <div className="info">
-            <Info node={selectedNode}/>
-          </div>
-        </div>
-      </div>
+        </main>
+        <Footer/>
+      </>
     );
   }
 
 export default App;
+
+
+

@@ -14,25 +14,9 @@ ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend, zoomPl
 
 const ScatterChart = ({nodes, onSelect}) => {
 
-  // const [zoomLevel, setZoomLevel] = useState ({
-  //   minX: Math.min(...nodes.map(node => Number(node.posX))) - 10,
-  //   minY: Math.min(...nodes.map(node => Number(node.posY))) - 10,
-  //   maxX: Math.max(...nodes.map(node => Number(node.posX))) + 10,
-  //   maxY: Math.max(...nodes.map(node => Number(node.posY))) + 10
-  // })
-
-  // useEffect(() =>{
-  //   setZoomLevel(
-  //     zoomLevel
-  //   )
-  // }, [onSelect])
-
   const options = {
     scales: {
       x: {
-        // max: zoomLevel.maxX,
-        // min: zoomLevel.minX,
-
         ticks: {
           callback: function(value) {
             return Math.ceil(value)
@@ -40,8 +24,6 @@ const ScatterChart = ({nodes, onSelect}) => {
         }
       },
       y: {
-        // max: zoomLevel.maxY,
-        // min: zoomLevel.minY,
         ticks: {
           callback: function(value) {
             return Math.ceil(value)
@@ -60,11 +42,6 @@ const ScatterChart = ({nodes, onSelect}) => {
           },
           mode: "xy",
           speed: 100,
-          // onZoom: () => {
-          //   setZoomLevel(
-          //     zoomLevel
-          //   )
-          // }
         },
         pan: {
           enabled: true,
@@ -83,7 +60,7 @@ const ScatterChart = ({nodes, onSelect}) => {
     }
   };
 
-  const colors = ['#bc5090', '#ff6361', '#ffa600', '#333333']
+  const colors = ["#ea5545", "#f46a9b", "#ef9b20", "#edbf33", "#ede15b", "#bdcf32", "#87bc45", "#27aeef", "#b33dc6"]
 
   const formatData = () => {
     let datasets = {}
@@ -109,7 +86,7 @@ const ScatterChart = ({nodes, onSelect}) => {
               )
 
         ),
-        backgroundColor: colors[Number(group) - 1]
+        backgroundColor: colors[readyData.length]
       })
     }
     return readyData
@@ -123,34 +100,6 @@ const ScatterChart = ({nodes, onSelect}) => {
 
   const data = {
     datasets: formattedData
-    // [
-    //   {
-    //     label: 'Group 1',
-    //     data: nodes.filter((node) => (
-    //       node.group === 1
-    //     )).map((node) => (
-    //       {
-    //         x: node.posX,
-    //         y: node.posY,
-    //         id: node.id
-    //       }
-    //     )),
-    //     backgroundColor: '#bc5090',
-    //   },
-    //   {
-    //     label: 'Group 2',
-    //     data: nodes.filter((node) => (
-    //       node.group === 2
-    //     )).map((node) => (
-    //       {
-    //         x: node.posX,
-    //         y: node.posY,
-    //         id: node.id
-    //       }
-    //     )),
-    //     backgroundColor: '#ffa600',
-    //   },
-    // ],
   };
 
   return (
