@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
-const Search = () => {
+const Search = ({getGenes}) => {
 
     const navigate = useNavigate()
 
@@ -15,7 +15,7 @@ const Search = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        console.log(data)
+        getGenes(data.protein)
         navigate('answer')
     }
 

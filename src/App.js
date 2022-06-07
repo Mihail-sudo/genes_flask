@@ -14,8 +14,8 @@ function App() {
 
 const [nodes, setNodes] = useState([])
 
-  const getData = () => {
-    fetch('nodes.json').then(response => response.json()).then(data => setNodes(data.coords.data
+  const getData = (data) => {
+    fetch(`http://127.0.0.1:8000/api/search?proteins=${data}`, {method: 'POST'}).then(response => response.json()).then(data => setNodes(data.coords.data
       .map((node, index) => (
         {
           posX: node[0],
@@ -28,9 +28,9 @@ const [nodes, setNodes] = useState([])
     ))))
   }
 
-  useEffect(()=>{
-    getData()
-  },[])
+  const getGenes = (data) => {
+    getData(data)
+  }
 
   const selectNode = (id) => {
     setNodes(
@@ -45,7 +45,7 @@ const [nodes, setNodes] = useState([])
 
   const selectedNode = nodes.find(node => node.selected)
 
-    return (
+     return (
       <>
       <Header current_user={current_user}/>
         <main role="main" className="container">
@@ -63,23 +63,10 @@ const [nodes, setNodes] = useState([])
                     <div className="content-section">
                       <Routes>
                         <Route path="/" element={<Home/>}/>
-                        <Route path="/search" element={<Search/>}/>
+                        <Route path="/search" element={<Search getGenes={getGenes} />}/>
                         <Route path="/search/answer" element={<Answer nodes={nodes} selectNode={selectNode} selectedNode={selectedNode}  />}/>
                       </Routes>
                     </div>
-                {/* </div> */}
-                {/* <div className="col-md-4">
-                    <div className="content-section">
-                        <h3>Our Sidebar</h3>
-                        <p className="text-muted">You can put any info here</p>
-                        <ul>
-                            <li>Latest posts</li>
-                            <li>Announcements</li>
-                            <li>Calendars</li>
-                            <li>etc</li>
-                        </ul>
-                    </div>
-                </div> */}
             </div>
         </main>
         <Footer/>

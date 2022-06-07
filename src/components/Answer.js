@@ -3,9 +3,10 @@ import ScatterChart from './ScatterChart'
 import Info from './Info'
 
 const Answer = ({nodes, selectNode, selectedNode}) => {
-  return (
+  return ( nodes.length == 0 ?
+    <h1>Loading... Please Wait</h1>
+    :
     <div>
-       <h1>The Graph</h1>
           <ScatterChart nodes={nodes} onSelect={selectNode}/>
           <div className="info">
             <Info node={selectedNode}/>
