@@ -24,7 +24,7 @@ const Search = () => {
             <fieldset className="form-group">
                 <legend>Type proteins here</legend>
                 <input {...register('protein')}/>
-                <button type="submit">Result</button>
+                <button className="btn" type="submit">Result</button>
             </fieldset>
         </form>
     )

@@ -144,6 +144,30 @@ footer p {
     color: #b5e8da;
 }
 
-/* .big {
-    font-size: 500em;
-} */
+.btn {
+    margin-bottom: 2px;
+    margin-left: 5px;
+    background-color: #000;
+    color: #ffffff;
+    height: 30px;
+    padding-top: 2px;
+    border: #000 solid 1px; 
+}
+
+.btn:hover {
+    color: #b5e8da;
+    font-weight: 600;
+    border: #ffffff solid 1px; 
+}
+
+.form-group {
+    text-align: center;
+}
+
+.info-table td {
+    padding-top: 10px;
+}
+
+.info-table tr :last-child {
+    padding-left: 10px;
+}

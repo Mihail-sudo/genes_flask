@@ -15,7 +15,17 @@ function App() {
 const [nodes, setNodes] = useState([])
 
   const getData = () => {
-    fetch('nodes.json').then(response => response.json()).then(data => setNodes(data.data.map((node, index) => ({posX: node[1], posY: node[0], group: node[2], id: index}))))
+    fetch('nodes.json').then(response => response.json()).then(data => setNodes(data.coords.data
+      .map((node, index) => (
+        {
+          posX: node[0],
+          posY: node[1],
+          group: node[2],
+          id: index,
+          name: data.genes[index].Name,
+          function: data.genes[index].Function
+        }
+    ))))
   }
 
   useEffect(()=>{

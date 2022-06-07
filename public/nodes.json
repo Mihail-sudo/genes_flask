@@ -1,179 +1,49 @@
 {
-  "columns": [
-    0, 
-    1, 
-    "labels"
-  ], 
-  "data": [
-    [
-      0.1097468734, 
-      -3.2755112648, 
-      -1
+  "coords": {
+    "columns": [
+      0, 
+      1, 
+      "labels"
     ], 
-    [
-      -0.9707305431, 
-      -3.6671221256, 
-      0
+    "data": [
+      [
+        -5.2778840065, 
+        4.3790121078, 
+        -1
+      ], 
+      [
+        -4.9877309799, 
+        5.3374814987, 
+        -1
+      ], 
+      [
+        -6.1517271996, 
+        4.6044301987, 
+        -1
+      ]
     ], 
-    [
-      -17.0273857117, 
-      17.7133827209, 
+    "index": [
+      0, 
+      1, 
       2
-    ], 
-    [
-      -16.6860237122, 
-      17.1315193176, 
-      2
-    ], 
-    [
-      0.1798040122, 
-      -4.4744915962, 
-      -1
-    ], 
-    [
-      -0.7012884617, 
-      -4.1566867828, 
-      -1
-    ], 
-    [
-      -1.8262110949, 
-      -2.9512424469, 
-      -1
-    ], 
-    [
-      -17.9789028168, 
-      16.9328155518, 
-      1
-    ], 
-    [
-      -1.439084053, 
-      -3.536021471, 
-      0
-    ], 
-    [
-      -1.3950948715, 
-      -2.6740307808, 
-      0
-    ], 
-    [
-      -18.1121330261, 
-      17.9003181458, 
-      1
-    ], 
-    [
-      -17.5866260529, 
-      17.8123207092, 
-      1
-    ], 
-    [
-      -0.1030937433, 
-      -4.0183677673, 
-      3
-    ], 
-    [
-      -17.3326873779, 
-      16.7067108154, 
-      1
-    ], 
-    [
-      0.4446027577, 
-      -4.0297141075, 
-      3
-    ], 
-    [
-      -0.8338620067, 
-      -2.2995302677, 
-      0
-    ], 
-    [
-      -0.4536850154, 
-      -2.5737776756, 
-      0
-    ], 
-    [
-      -18.2427978516, 
-      17.2631549835, 
-      1
-    ], 
-    [
-      -17.205450058, 
-      17.1083431244, 
-      1
-    ], 
-    [
-      -0.7486559749, 
-      -3.0096473694, 
-      0
-    ], 
-    [
-      -17.8664360046, 
-      17.4831867218, 
-      1
-    ], 
-    [
-      -1.2452681065, 
-      -3.1299152374, 
-      0
-    ], 
-    [
-      -16.8481044769, 
-      17.4869918823, 
-      2
-    ], 
-    [
-      -1.0360351801, 
-      -2.634614706, 
-      0
-    ], 
-    [
-      0.0670714006, 
-      -3.8195164204, 
-      3
-    ], 
-    [
-      -17.6091098785, 
-      17.1575737, 
-      1
-    ], 
-    [
-      -0.5317343473, 
-      -3.5965673923, 
-      0
-    ], 
-    [
-      -0.3589105904, 
-      -4.4544858932, 
-      -1
     ]
-  ], 
-  "index": [
-    0, 
-    1, 
-    2, 
-    3, 
-    4, 
-    5, 
-    6, 
-    7, 
-    8, 
-    9, 
-    10, 
-    11, 
-    12, 
-    13, 
-    14, 
-    15, 
-    16, 
-    17, 
-    18, 
-    19, 
-    20, 
-    21, 
-    22, 
-    23, 
-    24, 
-    25, 
-    26, 
-    27
-  ]
+  }, 
+  "genes": {
+    "0": {
+      "Function": "Cleaves substrates with C-terminal arginine residues. Probably modulates the Wnt signaling pathway, by cleaving some undefined protein. May play a role in cleavage during prohormone processing.", 
+      "GO": "GO:0005615 GO:0004181 GO:0008270 GO:0006518 GO:0016485 GO:0006508 GO:0016055", 
+      "Name": "CPZ"
+    }, 
+    "1": {
+      "Function": "Involved in the generation of internal asymmetric signals required for neuronal polarization and neurite outgrowth. Mediates netrin-1-induced F-actin-substrate coupling or 'clutch engagement' within the axon growth cone through activation of CDC42, RAC1 and PAK1-dependent signaling pathway, thereby converting the F-actin retrograde flow into traction forces, concomitantly with filopodium extension and axon outgrowth. Plays a role in cytoskeletal organization by regulating the subcellular localization of phosphoinositide 3-kinase (PI3K) activity at the axonal growth cone. Plays also a role in regenerative neurite outgrowth. In the developing cortex, cooperates with KIF20B to promote both the transition from the multipolar to the bipolar stage and the radial migration of cortical neurons from the ventricular zone toward the superficial layer of the neocortex. Involved in the accumulation of phosphatidylinositol 3,4,5-trisphosphate (PIP3) in the growth cone of primary hippocampal neurons.", 
+      "GO": "GO:0030424 GO:0044295 GO:0031252 GO:0005737 GO:0030175 GO:0030426 GO:0030027 GO:0005874 GO:0005875 GO:0015630 GO:0043204 GO:0048471 GO:0051015 GO:0045296 GO:0042802 GO:0019894 GO:0061573 GO:0007409 GO:0032488 GO:0060327 GO:0061163 GO:0038007 GO:0048812 GO:0045773 GO:2001224 GO:0007265 GO:2000114 GO:0006930", 
+      "Name": "SHTN1"
+    }, 
+    "2": {
+      "Function": "(S)-malate + NADP(+) = CO2 + NADPH + pyruvate", 
+      "GO": "GO:0005829 GO:0005739 GO:0043531 GO:0009055 GO:0042802 GO:0004471 GO:0004473 GO:0004470 GO:0030145 GO:0051287 GO:0050661 GO:0008948 GO:0005975 GO:0006108 GO:0009165 GO:0006090 GO:1902031 GO:0009743 GO:0009725", 
+      "Name": "ME1"
+    }
+  }, 
+  "no_genes": null
 }
