@@ -5,3 +5,5 @@ site.db
 algo.py
 genes.json
 sdfg.py
+genes.csv
+.pyc

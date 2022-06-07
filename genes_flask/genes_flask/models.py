@@ -57,3 +57,19 @@ class Post(db.Model):
     def __repr__(self) -> str:
         return f'Post {self.title}, {self.date_posted}'
     
+    
+class Gene(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    X = db.Column(db.Integer)
+    Unnamed = db.Column(db.Integer)
+    Original_request = db.Column(db.String(20), nullable=False)
+    Function = db.Column(db.Text, nullable=False)
+    Entry = db.Column(db.String(20))
+    Entry_name = db.Column(db.String(40))
+    Protein_names = db.Column(db.Text)
+    Gene_names = db.Column(db.Text)
+    Organism = db.Column(db.Text)
+    Length = db.Column(db.Integer)
+    GO = db.Column(db.Text)
+    Disease = db.Column(db.String(40))
+    Expr = db.Column(db.String(40))

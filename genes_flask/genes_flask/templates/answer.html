@@ -1,18 +1,25 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="content-section">
-        {% for gene_name, gene_option in genes.items() %}
+    {% for gene in genes %}
+        <div class="content-section">
             <div class="gen-info">
                 <div class="content-block">
-                    {% if gene_option %}
-                        <h4>{{ gene_name}}</h4>
-                        <p>{{ gene_option }}</p>
-                    {% else %}
-                        <h4>Sorry we didn't found {{ gene_name }}</h4>
-                    {% endif %}
+                    <h4>{{ gene.Original_request }}</h4>
+                    <p>{{ gene.Function }}</p>
                 </div>
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
+    {% if no_genes %}
+        <div class="content-section">
+            <div class="gen-info">
+                <div class="content-block">
+                    {% for gene in no_genes %}
+                        <p>{{ gene }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock content %}

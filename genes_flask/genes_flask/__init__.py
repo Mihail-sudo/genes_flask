@@ -29,11 +29,13 @@ def create_app(config_class=Config):
     from genes_flask.users.routes import users
     from genes_flask.posts.routes import posts
     from genes_flask.main.routes import main
-    from genes_flask.errors.hadlers import errors
+    from genes_flask.errors.handlers import errors
+    from genes_flask.api.routes import api
 
     app.register_blueprint(users)
     app.register_blueprint(posts)
     app.register_blueprint(main)
     app.register_blueprint(errors)
+    app.register_blueprint(api)
     
     return app
