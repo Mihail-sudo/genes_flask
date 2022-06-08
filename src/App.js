@@ -13,9 +13,14 @@ function App() {
   
 
 const [nodes, setNodes] = useState([])
+const [graphStatus, setGraphStatus] = useState('')
 
   const getData = (data) => {
-    fetch(`http://127.0.0.1:8000/api/search?proteins=${data}`, {method: 'POST'}).then(response => response.json()).then(data => setNodes(data.coords.data
+    setGraphStatus('Loading... Please Wait')
+    fetch(`http://127.0.0.1:8000/api/search?proteins=${data}`, {method: 'POST'}).then(response => response.json()).then(data => (
+      data.error ? setGraphStatus(`Error: ${data.error}`) : (
+        setGraphStatus('valid'),
+        setNodes(data.coords.data
       .map((node, index) => (
         {
           posX: node[0],
@@ -25,8 +30,23 @@ const [nodes, setNodes] = useState([])
           name: data.genes[index].Name,
           function: data.genes[index].Function
         }
-    ))))
+    ))))))
   }
+    
+    // fetch('nodes.json').then(response => response.json()).then(data => (
+    //   data.error ? setGraphStatus(data.error) : (
+    //     setGraphStatus('valid'),
+    //     setNodes(data.coords.data
+    //   .map((node, index) => (
+    //     {
+    //       posX: node[0],
+    //       posY: node[1],
+    //       group: node[2],
+    //       id: index,
+    //       name: data.genes[index].Name,
+    //       function: data.genes[index].Function
+    //     }
+    // ))))))  }
 
   const getGenes = (data) => {
     getData(data)
@@ -64,7 +84,7 @@ const [nodes, setNodes] = useState([])
                       <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/search" element={<Search getGenes={getGenes} />}/>
-                        <Route path="/search/answer" element={<Answer nodes={nodes} selectNode={selectNode} selectedNode={selectedNode}  />}/>
+                        <Route path="/search/answer" element={<Answer nodes={nodes} selectNode={selectNode} selectedNode={selectedNode}  graphStatus={graphStatus} />}/>
                       </Routes>
                     </div>
             </div>
@@ -75,6 +95,4 @@ const [nodes, setNodes] = useState([])
   }
 
 export default App;
-
-
 

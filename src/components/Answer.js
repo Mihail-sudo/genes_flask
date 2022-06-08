@@ -2,9 +2,9 @@ import React from 'react'
 import ScatterChart from './ScatterChart'
 import Info from './Info'
 
-const Answer = ({nodes, selectNode, selectedNode}) => {
-  return ( nodes.length == 0 ?
-    <h1>Loading... Please Wait</h1>
+const Answer = ({nodes, selectNode, selectedNode, graphStatus}) => {
+  return ( graphStatus != 'valid' ?
+    <h1>{graphStatus}</h1>
     :
     <div>
           <ScatterChart nodes={nodes} onSelect={selectNode}/>

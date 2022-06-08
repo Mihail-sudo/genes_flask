@@ -32,6 +32,13 @@ const ScatterChart = ({nodes, onSelect}) => {
       }
     },
     plugins: {
+      tooltip: {
+        callbacks: {
+            label: function(ctx) {
+                return(nodes[ctx.dataset.data[ctx.dataIndex].id].name);
+            }
+        }
+      },
       zoom: {
         zoom: {
           wheel: {
