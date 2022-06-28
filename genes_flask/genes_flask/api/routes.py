@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request, url_for, jsonify
+from flask import Blueprint, request, jsonify
 import json
 from genes_flask.models import Post
 import pandas as pd
@@ -11,7 +11,7 @@ api = Blueprint('api', __name__)
 @api.route("/api/")
 @api.route("/api/home")
 def home():
-    page = request.args.get('page', 1, type=int)
+    # page = request.args.get('page', 1, type=int)
     posts = Post.query.all()
     return jsonify({
         'posts': 
@@ -36,18 +36,21 @@ def search_ans():
     print(proteins)
     proteins = proteins.replace(' ', '').split(',')
     genes, no_genes = dict(), set()
-    for idx, protein in enumerate(proteins):
-        gene = Gene.query.filter_by(Original_request=protein.upper()).first()
+    idx = 0
+    for protein in proteins:
+        gene = Gene.query.filter_by(Original_request=protein).first()
         if gene:
             genes[idx] = {"Name": gene.Original_request, "Function": gene.Function, "GO": gene.GO}
+            idx += 1
         else:
             no_genes.add(protein.upper())
     
-    # return redirect(url_for('api.answer', genes=json.dumps(genes), no_genes=no_genes))
     no_genes = list(no_genes)
     if len(genes) < 3:
-        return jsonify({'error': 'There shiuld be 3 or more genes'})
+        return jsonify({'error': 'There should be 3 or more genes'})
     
     df = pd.DataFrame.from_dict(genes, orient='index')
-    coords = get_coords(df)
-    return jsonify({'genes': genes, 'no_genes': no_genes, 'coords': coords}) #redirect(url_for('api.answer', genes=json.dumps(genes), coords=coords, no_genes=no_genes))
+    coords = json.loads(get_coords(df))
+    response = jsonify({'genes': genes, 'no_genes': no_genes, 'coords': coords})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response

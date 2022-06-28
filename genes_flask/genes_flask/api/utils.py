@@ -10,38 +10,38 @@ model = AutoModel.from_pretrained("bionlp/bluebert_pubmed_mimic_uncased_L-12_H-7
 
 def get_coords(genes):
     Summary = genes
-    text = Summary["Function"].values.tolist()
+    text = Summary["Function"].values.tolist() # Function - текстовые описания генов 
     list_of_tensors = []
 
-    for i in tqdm(text):
+    for i in tqdm(text): # проходит по описаниям каждого гена по-отдельности
         tokens = tokenizer.encode_plus(i, add_special_tokens=False, 
-                                    return_tensors='pt')
+                                    return_tensors='pt') # скрипт для разделения текста на куски по 510 
         input_id_chunks = tokens['input_ids'][0].split(510) 
         mask_chunks = tokens['attention_mask'][0].split(510)
         
         chunksize = 512
-        input_id_chunks = list(input_id_chunks)
-        mask_chunks = list(mask_chunks)
+        input_id_chunks = list(input_id_chunks) # батчи токенов
+        mask_chunks = list(mask_chunks) # батчи attention mask
 
         for i in range(len(input_id_chunks)):
             input_id_chunks[i] = torch.cat([
-                torch.Tensor([101]), input_id_chunks[i], torch.Tensor([102])
+                torch.Tensor([101]), input_id_chunks[i], torch.Tensor([102]) # добавление разделяющих токенов
             ])
             mask_chunks[i] = torch.cat([
-                torch.Tensor([1]), mask_chunks[i], torch.Tensor([1])
+                torch.Tensor([1]), mask_chunks[i], torch.Tensor([1]) # указываем это в attention mask
             ])
 
-            pad_len = chunksize - input_id_chunks[i].shape[0]
+            pad_len = chunksize - input_id_chunks[i].shape[0] # padding
             if pad_len > 0:
                 input_id_chunks[i] = torch.cat([
                     input_id_chunks[i], torch.Tensor([0]* pad_len) 
                 ])
                 mask_chunks[i] = torch.cat([
-                    mask_chunks[i], torch.Tensor([0]*pad_len)
+                    mask_chunks[i], torch.Tensor([0]*pad_len) # также указываем padding в attention mask
                 ])
 
 
-        input_ids = torch.stack(input_id_chunks)
+        input_ids = torch.stack(input_id_chunks)   # склеивание батчей токенов и attention mask в словарь для модели
         attention_mask = torch.stack(mask_chunks)
         input_dict = {
             'input_ids': input_ids.long(),
@@ -50,22 +50,22 @@ def get_coords(genes):
 
 
 
-        output = model(**input_dict)
-        temp = output[1].detach().numpy()
+        output = model(**input_dict)   # использование модели
+        temp = output[1].detach().numpy() # считываем выходные данные 
         list_of_tensors.append(temp)
 
-    for i in tqdm(range(len(list_of_tensors))):
+    for i in tqdm(range(len(list_of_tensors))):    # объединение порезанного текста по векторам
         a = np.empty(0)
         for j in range(len(list_of_tensors[i])):
             a = np.concatenate((a, list_of_tensors[i][j]), axis=None)
         list_of_tensors[i]= a
 
-    df = pd.DataFrame(list_of_tensors).fillna(0)
+    df = pd.DataFrame(list_of_tensors).fillna(0) # создаем датафрейм с которым будем работать и зануляем NaN
 
-    abbs = Summary['Function'].str.findall('[a-z0-9]{0,3}[A-Z]{2,3}[a-z0-9]{0,3}').values
+    abbs = Summary['Function'].str.findall('[a-z0-9]{0,3}[A-Z]{2,3}[a-z0-9]{0,3}').values # находит акронимы в тексте
     abb = pd.DataFrame(abbs)
-    flat_list = [item for sublist in abbs for item in sublist]
-    lst = list(set(flat_list))
+    flat_list = [item for sublist in abbs for item in sublist] # собирает все акронимы в один список
+    lst = list(set(flat_list)) # оставляет только уникальные акронимы
     dic = dict.fromkeys(lst, 0) 
 
     for i in tqdm(range(len(abb[0]))): 
@@ -78,10 +78,9 @@ def get_coords(genes):
     df_abb = pd.DataFrame(abb[0].tolist())
 
     go_terms_list = Summary["GO"].dropna().tolist() 
-    unique_go_terms = sorted(list(set(' '.join(go_terms_list).split(" "))))
-    go_dic = dict.fromkeys(unique_go_terms, 0)
-    go_terms = pd.DataFrame(Summary["GO"]).fillna("pad") 
-
+    unique_go_terms = sorted(list(set(' '.join(go_terms_list).split(" ")))) # собирается список GO-terms 
+    go_dic = dict.fromkeys(unique_go_terms, 0) # Создается словарь где ключи - GO-terms, а значения зануляются
+    go_terms = pd.DataFrame(Summary["GO"]).fillna("pad")
     for i in tqdm(range(len(go_terms["GO"]))):
         temp_dic = go_dic.copy()
         for j in go_terms["GO"][i].split():
@@ -90,7 +89,6 @@ def get_coords(genes):
         go_terms['GO'][i] = list(temp_dic.values())
         
     go_df = pd.DataFrame(go_terms['GO'].tolist())
-
     from umap import UMAP
     reducer = UMAP(n_components = 200, random_state = 0, init='random')  
     second_reducer = UMAP(n_components = 2, random_state = 0, init='random')
