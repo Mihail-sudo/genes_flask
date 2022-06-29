@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import Dropzone from './Dropzone'
 
 const Search = ({getGenes}) => {
 
@@ -20,6 +21,7 @@ const Search = ({getGenes}) => {
     }
 
     return (
+        <div>
         <form onSubmit={handleSubmit(onSubmit)}>
             <fieldset className="form-group">
                 <legend>Type proteins here</legend>
@@ -27,6 +29,9 @@ const Search = ({getGenes}) => {
                 <button className="btn" type="submit">Result</button>
             </fieldset>
         </form>
+        <p className='searchPageElement'>OR</p>
+        <Dropzone onSubmit={onSubmit}/>
+        </div>
     )
 }
 

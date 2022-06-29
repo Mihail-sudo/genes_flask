@@ -171,3 +171,18 @@ footer p {
 .info-table tr :last-child {
     padding-left: 10px;
 }
+
+.searchPageElement{
+    text-align: center;
+    padding-top: 10px;
+  }
+
+.dropzone {
+    background-color: #dddddd;
+    border: 1px dashed #333;
+    border-radius: 5px;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+    height: 150px;
+}

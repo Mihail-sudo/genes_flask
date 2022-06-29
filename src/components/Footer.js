@@ -12,7 +12,7 @@ const Footer = () => {
                 <div className="row mt-3">
                     <div className="col-4"><a href="#">Message</a></div>
                     <div className="col-4"><a href="#">Href</a></div>
-                    <div className="col-4"><a href="#">Don't kill us</a></div>
+                    <div className="col-4"><a href="#">Text</a></div>
                 </div>
                 <div className="row justify-content-end mt-3 mb-3">
                     <div className="col-4"><a href="#">Message</a></div>
