@@ -1,7 +1,6 @@
-from flask import Blueprint, redirect, request, render_template, url_for, json
+from flask import Blueprint, redirect, request, render_template, url_for
 from genes_flask.models import Post
 from genes_flask.main.forms import ProteinsForm
-from genes_flask.main.utils import get_coords
 from genes_flask.models import Gene
 
 
