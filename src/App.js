@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import Search from './components/Search';
 import Answer from './components/Answer';
 import Home from './components/Home';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
 
 function App() {
   
@@ -52,6 +54,10 @@ const [graphStatus, setGraphStatus] = useState('')
     getData(data)
   }
 
+  const onSignUp = (data, action) =>{
+    fetch(`http://127.0.0.1:8000/api/${action}`,{mode:'no-cors'}, {method: 'POST', body: data}).then(response => console.log(response.json()))
+  }
+
   const selectNode = (id) => {
     setNodes(
       nodes.map(node => 
@@ -60,7 +66,7 @@ const [graphStatus, setGraphStatus] = useState('')
   }
 
   const current_user = {
-    is_authenticated: true
+    is_authenticated: false
   }
 
   const selectedNode = nodes.find(node => node.selected)
@@ -85,6 +91,8 @@ const [graphStatus, setGraphStatus] = useState('')
                         <Route path="/" element={<Home/>}/>
                         <Route path="/search" element={<Search getGenes={getGenes} />}/>
                         <Route path="/search/answer" element={<Answer nodes={nodes} selectNode={selectNode} selectedNode={selectedNode}  graphStatus={graphStatus} />}/>
+                        <Route path="/signUp" element={<SignUp onSignUp={onSignUp}/>}/>
+                        <Route path="/login" element={<Login onSignUp={onSignUp}/>}/>
                       </Routes>
                     </div>
             </div>

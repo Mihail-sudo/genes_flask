@@ -186,3 +186,13 @@ footer p {
     margin-bottom: 10px;
     height: 150px;
 }
+
+
+.authForm fieldset {
+    margin-bottom: 10px;
+}
+
+.authForm .btn {
+    width: 30%;
+    margin-top: 10px;
+}
