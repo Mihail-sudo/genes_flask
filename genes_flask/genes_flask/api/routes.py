@@ -7,7 +7,7 @@ from genes_flask import bcrypt, db
 from genes_flask.api.utils import get_coords
 from genes_flask.api.forms import RegistrationForm, LoginForm
 from genes_flask.models import Gene, User
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_required
 
 
 api = Blueprint('api', __name__)
@@ -77,15 +77,17 @@ def register_post():
         ('confirm_password', request.args.get('confirm_password')),
     ]), csrf_enabled=False)
     
+    print(request)
     print(form.errors)
+    print(form.email.data)
     print(form.validate())
-    #if form.validate():
-    hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-    user = User(username=form.username.data, email=form.email.data, password=hashed_password)
-    db.session.add(user)
-    db.session.commit()
-    return jsonify({'status': 'ok'})
-    #return jsonify({'status': 'user was not created'})
+    if form.validate():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        return jsonify({'status': 'ok'})
+    return jsonify({'status': 'user was not created'})
 
 
 @api.route('/api/login', methods=['GET'])
@@ -101,12 +103,13 @@ def login_post():
     form.email.data = request.args.get('email')
     form.password.data = request.args.get('password')
     form.remember.data = request.args.get('remember')
+    print(form.validate())
     #if form.validate():
     user = User.query.filter_by(email=form.email.data).first()
     if user and bcrypt.check_password_hash(user.password, form.password.data):
         #login_user(user, remember=form.remember.data)
         #next_page = request.args.get('next')
-        return jsonify({'user': 'user.id'})
+        return jsonify({'user': user.id})
     else:
         return jsonify({'status': 'Login unsuccessful. Please check email or password'})
     #return jsonify({'status': 'user did not created'})

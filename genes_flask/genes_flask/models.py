@@ -27,6 +27,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default=default_account_images[randint(0, 4)])
     password = db.Column(db.String(60), nullable=False)
+    #history = db.Column(db.ARRAY(db.String))
     posts = db.relationship('Post', backref='author', lazy=True)
     
     def get_reset_token(self):
