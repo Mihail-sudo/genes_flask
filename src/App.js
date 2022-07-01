@@ -55,7 +55,7 @@ const [graphStatus, setGraphStatus] = useState('')
   }
 
   const onSignUp = (data, action) =>{
-    fetch(`http://127.0.0.1:8000/api/${action}`,{mode:'no-cors'}, {method: 'POST', body: data}).then(response => console.log(response.json()))
+    fetch(`http://127.0.0.1:8000/api/${action}?username=${data.username}&email=${data.email}&password=${data.password}&confirm_password=${data.confirm_password}`, {method: 'POST'}).then(response => console.log(response.json()))
   }
 
   const selectNode = (id) => {

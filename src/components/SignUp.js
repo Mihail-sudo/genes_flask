@@ -14,7 +14,8 @@ const SignUp = ({onSignUp}) => {
 
     const navigate = useNavigate()
 
-    const onSubmit = (data) => {
+    const onSubmit = (data, e) => {
+        e.preventDefault()
         onSignUp(data, 'register')
         navigate('/')
     }
